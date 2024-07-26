@@ -53,7 +53,7 @@ function toggleData(year) {
             });
 
             const years = [ 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
-
+            years.reverse();
             const yearSelect = document.getElementById('year-select');
             yearSelect.innerHTML = '<option value="" >Select a Particular Year</option>';
             years.forEach((year) => {
@@ -236,104 +236,136 @@ function updateScatterplot(data) {
     svg.select('#scatterplot-title')
     .text(`Year ${selectedYear}`);
 
+    if (selectedYear === 'combined') {
+        const annotationscombo = [{
+            note: {
+                title: 'US Universtites Top Ranking Scores',
+                label: 'This group highlights the top universities from 2011-2024 with US Universities dominating the scores',
+                wrap: 300,
+            },
+            connector: {
+                end: 'arrow',
+            },
+            x: width - 50,
+            y: 90,
+            dx: -30,
+            dy: 250,
+        }, ];
+        const annotationcombo = d3.annotation().type(d3.annotationCallout).annotations(annotationscombo);
+        svg.append('g').attr('class', 'annotation-group').call(annotationcombo);
+    }
+    else if (selectedYear === '2024') {
+        const annotations2024 = [{
+            note: {
+                title: 'UIUC Highest Rank so far',
+                label: 'UIUC was consistently scoring 71-75 overall but reached 77.9 this year, a record high.',
+                wrap: 300,
+            },
+            connector: {
+                end: 'arrow',
+            },
+            x: width - 285,
+            y: 110,
+            dx: -50,
+            dy: 250,
+        }, ];
+        const annotation2024 = d3.annotation().type(d3.annotationCallout).annotations(annotations2024);
+        svg.append('g').attr('class', 'annotation-group').call(annotation2024);
+    } else if (selectedYear === '2023') {
+        const annotations2023 = [{
+            note: {
+                title: 'Harvard best university from 2021-2023',
+                label: 'Harvard remains the highest scoring university from 2021-2023',
+                wrap: 200,
+            },
+            connector: {
+                end: 'arrow',
+            },
+            x: width - 50,
+            y: 5,
+            dx: -50,
+            dy: 250,
+        }, ];
+        const annotation2023 = d3.annotation().type(d3.annotationCallout).annotations(annotations2023);
+        svg.append('g').attr('class', 'annotation-group').call(annotation2023);
+    } else if (selectedYear === '2022') {
+        const annotations2022 = [{
+            note: {
+                title: 'Top British Universities',
+                label: 'Oxford and Cambridge are the top British universities in the rankings with very close scores consistently.',
+                wrap: 200,
+            },
+            connector: {
+                end: 'arrow',
+            },
+            x: width - 81,
+            y: 5,
+            dx: -10,
+            dy: 140,
+        }, ];
 
-    // if (selectedYear === '2023') {
-    //     const annotations2023 = [{
-    //         note: {
-    //             title: 'Highly Ranked Universities',
-    //             label: 'This group contains universities with high scores in both Teaching and Research.',
-    //             wrap: 200,
-    //         },
-    //         connector: {
-    //             end: 'arrow',
-    //         },
-    //         x: width - 110,
-    //         y: 50,
-    //         dx: -50,
-    //         dy: 250,
-    //     }, ];
+        const annotation2022 = d3.annotation().type(d3.annotationCallout).annotations(annotations2022);
+        svg.append('g').attr('class', 'annotation-group').call(annotation2022);
+    } else if (selectedYear === '2021') {
+        //This kinda works idk 
+        const lowestOverallScore2021 = scatterplotData['2021'].reduce((min, d) => (d.scores_overall < min ? d.scores_overall : min), Infinity);
+        const lowestOverallScoreData2021 = scatterplotData['2021'].find((d) => d.scores_overall === lowestOverallScore2021);
+        if (lowestOverallScoreData2021) {
+            const annotations2021 = [{
+                note: {
+                    title: 'Last time McMaster was ranked',
+                    label: `Last time Mc Master was ranked in top 75 was in 2021`,
+                    wrap: 200,
+                },
+                connector: {
+                    end: 'arrow',
+                },
+                x: xScale(lowestOverallScoreData2021.scores_teaching) - 20,
+                y: yScale(lowestOverallScoreData2021.scores_research)- 26,
+                dx: 150,
+                dy: -20,
+            }, ];
 
-    //     const annotation2023 = d3.annotation().type(d3.annotationCallout).annotations(annotations2023);
-    //     svg.append('g').attr('class', 'annotation-group').call(annotation2023);
-    // } else if (selectedYear === '2022') {
-    //     const annotations2022 = [{
-    //         note: {
-    //             title: 'University of Tokyo',
-    //             label: 'You may notice the University of Tokyo scored well in research and teaching metrics for this year' +
-    //                 'however, only have an overall score of 76. This is due to other factors that are not shown in this graph.',
-    //             wrap: 200,
-    //         },
-    //         connector: {
-    //             end: 'arrow',
-    //         },
-    //         x: width - 173,
-    //         y: 105,
-    //         dx: -10,
-    //         dy: 140,
-    //     }, ];
+            const annotation2021 = d3.annotation().type(d3.annotationCallout).annotations(annotations2021);
+            svg.append('g').attr('class', 'annotation-group').call(annotation2021);
+        }
+    } else if (selectedYear === '2020') {
+        const annotations2020 = [{
+            note: {
+                title: 'Lowest score in top 75',
+                label: 'With a score of 65.4, McMaster is the lowest ranked in 2020',
+                wrap: 200,
+            },
+            connector: {
+                end: 'arrow',
+            },
+            x: width - 520,
+            y: 315,
+            dx: 120,
+            dy: 30,
+        }, ];
 
-    //     const annotation2022 = d3.annotation().type(d3.annotationCallout).annotations(annotations2022);
-    //     svg.append('g').attr('class', 'annotation-group').call(annotation2022);
-    // } else if (selectedYear === '2021') {
-    //     //This kinda works idk 
-    //     const lowestOverallScore2021 = scatterplotData['2021'].reduce((min, d) => (d.scores_overall < min ? d.scores_overall : min), Infinity);
-    //     const lowestOverallScoreData2021 = scatterplotData['2021'].find((d) => d.scores_overall === lowestOverallScore2021);
-    //     if (lowestOverallScoreData2021) {
-    //         const annotations2021 = [{
-    //             note: {
-    //                 title: 'Lowest Overall Score in 2021',
-    //                 label: `${lowestOverallScoreData2021.name}\nCountry: ${lowestOverallScoreData2021.location}\nOverall Score: ${lowestOverallScoreData2021.scores_overall}`,
-    //                 wrap: 200,
-    //             },
-    //             connector: {
-    //                 end: 'arrow',
-    //             },
-    //             x: xScale(lowestOverallScoreData2021.scores_teaching) + 10,
-    //             y: yScale(lowestOverallScoreData2021.scores_research),
-    //             dx: 150,
-    //             dy: -20,
-    //         }, ];
+        const annotation2020 = d3.annotation().type(d3.annotationCallout).annotations(annotations2020);
+        svg.append('g').attr('class', 'annotation-group').call(annotation2020);
+    } else if (selectedYear === '2019') {
+        const annotations2019 = [{
+            note: {
+                title: 'UIUC Worst Year',
+                label: 'Big drop in UIUC score to 72.3',
+                wrap: 400,
+            },
+            connector: {
+                end: 'arrow',
+            },
+            x: width - 350,
+            y: 170,
+            dx: 100,
+            dy: -130,
+        }, ];
 
-    //         const annotation2021 = d3.annotation().type(d3.annotationCallout).annotations(annotations2021);
-    //         svg.append('g').attr('class', 'annotation-group').call(annotation2021);
-    //     }
-    // } else if (selectedYear === '2020') {
-    //     const annotations2020 = [{
-    //         note: {
-    //             title: 'UIUC Best Year',
-    //             label: 'With a score of 72.9, this is the University of Illinois\' best overall year.',
-    //             wrap: 200,
-    //         },
-    //         connector: {
-    //             end: 'arrow',
-    //         },
-    //         x: width - 475,
-    //         y: 200,
-    //         dx: 120,
-    //         dy: 30,
-    //     }, ];
-
-    //     const annotation2020 = d3.annotation().type(d3.annotationCallout).annotations(annotations2020);
-    //     svg.append('g').attr('class', 'annotation-group').call(annotation2020);
-    // } else if (selectedYear === '2019') {
-    //     const annotations2019 = [{
-    //         note: {
-    //             title: 'UIUC Worst Year',
-    //             label: 'Conversely, with a score of 72.3, this is the University of Illinois\' worst year (tied with 2021).',
-    //             wrap: 200,
-    //         },
-    //         connector: {
-    //             end: 'arrow',
-    //         },
-    //         x: width - 480,
-    //         y: 220,
-    //         dx: 0,
-    //         dy: -130,
-    //     }, ];
-
-    //     const annotation2019 = d3.annotation().type(d3.annotationCallout).annotations(annotations2019);
-    //     svg.append('g').attr('class', 'annotation-group').call(annotation2019);
-    // }
+        const annotation2019 = d3.annotation().type(d3.annotationCallout).annotations(annotations2019);
+        svg.append('g').attr('class', 'annotation-group').call(annotation2019);
+    }
 }
 
 toggleData('combined');
