@@ -52,10 +52,10 @@ function toggleData(year) {
                 countrySelect.appendChild(option);
             });
 
-            const years = ['combined', 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+            const years = [ 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
 
             const yearSelect = document.getElementById('year-select');
-            yearSelect.innerHTML = '<option value="" >Select a Year</option>';
+            yearSelect.innerHTML = '<option value="" >Select a Particular Year</option>';
             years.forEach((year) => {
                 const option = document.createElement('option');
                 option.value = year;
@@ -93,6 +93,9 @@ function updateCountryData(selectedCountry) {
 
 function updateYearData() {
     let year = document.getElementById('year-select').value;
+    if (year === '') {
+        year = 'combined';
+    }
     selectedYear = year;
     selectedCountry = '';
     document.getElementById('country-select').value = '';
