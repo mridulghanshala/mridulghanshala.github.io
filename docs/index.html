@@ -1,1 +1,42 @@
-Hello World 2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Global Universities Performance Overview</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1 clas="title">Global Universities Performance Overview</h1>
+    <p class="description">
+        The chart on the webpage highlights the academic performance of the top 75 universities worldwide, focusing on their Teaching and Research scores. 
+        It illustrates the annual consistency of leading institutions. Use the dropbox to explore academic metrics from 2011 to 2024.
+        To view the top universities in a specific country, select the country from the dropbox.
+        You can use the reset button to go back to the initial state which displays the top 75 university rankings for all of the years combined.
+        Hover over a data point for detailed information about each university.    </p>
+    <div id="scatterplot-container">
+        <div id="scatterplot"></div>
+        <div id="legend" class="legend">
+        </div>
+    </div>
+    <div id="controls">
+        <div class="button-container">
+            <select id="country-select" onchange="updateCountryData()">
+                <option value="">Select a Country</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <select id="year-select" onchange="updateYearData()">
+                <option value="">Select a Year</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <input type="button" value="Reset" id="reset-button" onclick="resetChart()">
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

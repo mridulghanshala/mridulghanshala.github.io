@@ -1,0 +1,101 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 10px;
+}
+
+h1 {
+    margin-top: 5px;
+}
+
+p {
+    text-align: center;
+    font-size: 12px;
+    margin: 0px;
+}
+
+#scatterplot-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    text-align: center;
+}
+
+.description {
+    text-align: center; font-size: 18px; margin-bottom: 0px;
+}
+
+#scatterplot,
+#legend {
+    overflow-y: auto;  /* Enables vertical scrolling */
+    overflow-x: hidden; /* Hides horizontal scroll */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.button-container {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container input[type="button"] {
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#year-select,
+#country-select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+#reset-button {
+    margin-left: 10px;
+}
+
+#legend {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 10px;
+    margin-right: 5px;
+}
+
+#tooltip {
+    position: absolute;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+}
