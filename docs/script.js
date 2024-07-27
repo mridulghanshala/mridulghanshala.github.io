@@ -187,14 +187,14 @@ function updateScatterplot(data) {
         .attr('x', width / 2)
         .attr('y', height + (margin.bottom / 2))
         .attr('text-anchor', 'middle')
-        .text('Teaching Score');
+        .text('Research Score');
 
     svg.append('text')
         .attr('transform', 'rotate(-90)')
         .attr('x', -height / 2)
         .attr('y', -margin.left)
         .attr('text-anchor', 'middle')
-        .text('Research Score');
+        .text('Teaching Score');
 
     svg.append('text')
         .attr('id', 'scatterplot-title')
